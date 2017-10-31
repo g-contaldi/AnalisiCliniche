@@ -1,17 +1,11 @@
 package it.dstech.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
 
-@Entity
 public class Analiti {
 
 	@Id
-	@GeneratedValue
-	private int id;
+	private String id;
 
 	private String dataPrestazione;
 
@@ -27,14 +21,13 @@ public class Analiti {
 
 	private String valore5;
 
-	@ManyToOne(fetch = FetchType.EAGER)
 	private Paziente paziente;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

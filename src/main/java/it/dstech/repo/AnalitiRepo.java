@@ -1,9 +1,9 @@
 package it.dstech.repo;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import it.dstech.model.Analiti;
 
-public interface AnalitiRepo extends CrudRepository<Analiti, Integer> {
+public interface AnalitiRepo extends MongoRepository<Analiti, Integer> {
 
 }

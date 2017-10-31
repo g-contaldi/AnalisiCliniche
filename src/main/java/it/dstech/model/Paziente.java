@@ -3,12 +3,9 @@ package it.dstech.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import org.springframework.data.annotation.Id;
 
-@Entity
+
 public class Paziente {
 
 	@Id
@@ -26,7 +23,6 @@ public class Paziente {
 
 	private String sesso;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "paziente")
 	private List<Analiti> listAnaliti = new ArrayList<>();
 
 	public String getId() {
