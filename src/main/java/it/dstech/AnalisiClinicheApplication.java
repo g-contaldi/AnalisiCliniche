@@ -5,9 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,33 +16,24 @@ import it.dstech.repo.AnalitiRepo;
 import it.dstech.repo.PazienteRepo;
 
 @SpringBootApplication
-public class AnalisiClinicheApplication {
-
-	private static PazienteRepo pazienteRepo;
+public class AnalisiClinicheApplication implements CommandLineRunner {
 
 	@Autowired
-	private PazienteRepo stPazienteRepo;
-
-	@PostConstruct
-	public void initP() {
-		AnalisiClinicheApplication.pazienteRepo = stPazienteRepo;
-	}
-
-	private static AnalitiRepo analitiRepo;
+	private PazienteRepo pazienteRepo;
 
 	@Autowired
-	private AnalitiRepo stAnalitiRepo;
+	private AnalitiRepo analitiRepo;
 
-	@PostConstruct
-	public void initA() {
-		AnalisiClinicheApplication.analitiRepo = stAnalitiRepo;
-	}
-
-	private static final String PATH = "/home/gianluca/Scrivania/test.txt";
+	private static final String PATH = "/home/gianluca/Scrivania/prova.txt";
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
 
 		SpringApplication.run(AnalisiClinicheApplication.class, args);
+
+	}
+
+	@Override
+	public void run(String... arg0) throws Exception {
 
 		String[] records = readFromFile(PATH);
 
@@ -53,7 +43,7 @@ public class AnalisiClinicheApplication {
 
 	}
 
-	private static String[] readFromFile(String fileName) throws IOException {
+	private String[] readFromFile(String fileName) throws IOException {
 		System.out.println("\nReading from file...\n--------------\n");
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		try {
@@ -75,7 +65,7 @@ public class AnalisiClinicheApplication {
 		}
 	}
 
-	private static void generateData(String[] records) {
+	private void generateData(String[] records) {
 		System.out.println("Start data processing...\n--------------\n");
 		for (String record : records) {
 			if (!record.isEmpty()) {
@@ -121,7 +111,7 @@ public class AnalisiClinicheApplication {
 		System.out.println("\nEnd data processing.\n--------------\n");
 	}
 
-	private static void readFromDatabase() {
+	private void readFromDatabase() {
 		System.out.println("Reading from database...\n--------------\n");
 		pazienteRepo.findAll().forEach(System.out::println);
 		System.out.println("\nDONE!\n--------------");
